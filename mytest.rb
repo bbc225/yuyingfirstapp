@@ -11,11 +11,11 @@ configure :production do
 	enable :sessions
 	set :username, 'frank'
 	set :password, 'sinatra'
-	DataMapper.auto_migrate!
 end
 
 configure :development do
-	require './mydata'
+	require './song'
+  DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/development.db")
 	enable :sessions
 	set :username, 'frank'
 	set :password, 'sinatra'
@@ -71,7 +71,7 @@ end
 
 get '/songs/:id' do
 	halt(401,'Not Authorized') unless session[:admin]
-	@song = Song.find_by(id: params[:id])
+	@song = Song.get(params[:id])
 	slim :show_song
 end
 
@@ -84,20 +84,20 @@ end
 
 get '/songs/:id/edit' do
 	halt(401,'Not Authorized') unless session[:admin]
-	@song = Song.find_by(id: params[:id])
+	@song = Song.get(params[:id])
 	slim :edit_song
 end
 
 put '/songs/:id' do
 	halt(401,'Not Authorized') unless session[:admin]
-	song = Song.find_by(id: params[:id])
+	song = Song.get(params[:id])
 	song.update(params[:song])
 	redirect to("/songs/#{song.id}")
 end
 
 delete '/songs/:id' do
 	halt(401,'Not Authorized') unless session[:admin]
-	Song.find_by(id: params[:id]).destroy
+	Song.get(params[:id]).destroy
 	redirect to('/songs')
 end
 

@@ -3,19 +3,9 @@ gem "sinatra"
 gem "slim"
 gem "sass"
 
-group :development do
-	gem 'mysql2'
-	gem 'activerecord'
-	gem "dm-core"
-	gem 'data_mapper'
-	gem 'dm-migrations'
-	gem "thin"
-end
-
-group :production do
-	gem "dm-core"
-	gem 'dm-migrations'
-	gem "thin"
-	gem "pg"
-	gem "dm-postgres-adapter"
-end
+gem "dm-core"
+gem "dm-migrations"
+gem "thin"
+gem "pg", :group => :production
+gem "dm-postgres-adapter", :group => :production
+gem "dm-sqlite-adapter", :group => :development
