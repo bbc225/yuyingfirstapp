@@ -1,3 +1,3 @@
 require './mytest.rb'
 
-run Mytestapp
+run Sinatra::Application
