@@ -4,9 +4,18 @@ require 'slim'
 require 'sass'
 require 'mysql2'
 require 'active_record'
-require_relative 'mydata.rb'
 
-configure do
+
+configure :production do
+	require_relative './song'
+	enable :sessions
+	set :username, 'frank'
+	set :password, 'sinatra'
+	DataMapper.auto_migrate!
+end
+
+configure :development do
+	require_relative 'mydata.rb'
 	enable :sessions
 	set :username, 'frank'
 	set :password, 'sinatra'

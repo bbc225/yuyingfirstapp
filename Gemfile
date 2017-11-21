@@ -2,5 +2,21 @@ source :rubygems
 gem "sinatra"
 gem "slim"
 gem "sass"
-gem 'mysql2'
-gem 'activerecord'
+
+group :development do
+	gem 'mysql2'
+	gem 'activerecord'
+	gem "dm-core"
+	gem 'data_mapper'
+	gem 'dm-migrations'
+	gem "thin"
+end
+
+group :production do
+	gem "dm-core"
+	gem 'data_mapper'
+	gem 'dm-migrations'
+	gem "thin"
+	gem "pg"
+	gem "dm-postgres-adapter"
+end
