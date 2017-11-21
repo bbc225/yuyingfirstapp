@@ -14,7 +14,6 @@ end
 
 group :production do
 	gem "dm-core"
-	gem 'data_mapper'
 	gem 'dm-migrations'
 	gem "thin"
 	gem "pg"
