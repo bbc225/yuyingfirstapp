@@ -6,7 +6,7 @@ require 'sass'
 
 
 configure :production do
-	require_relative './song'
+	require './song'
 	DataMapper.setup(:default, ENV['DATABASE_URL'])
 	enable :sessions
 	set :username, 'frank'
@@ -15,7 +15,7 @@ configure :production do
 end
 
 configure :development do
-	require_relative 'mydata.rb'
+	require './mydata'
 	enable :sessions
 	set :username, 'frank'
 	set :password, 'sinatra'
